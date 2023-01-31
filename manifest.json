@@ -1,0 +1,29 @@
+{
+    "name": "LinKeep",
+    "description": "Keep and manage your's favorites links with a simple command. Have a easy acess in other devices!",
+    "version": "1.0.0",
+    "manifest_version": 3,
+    "background": {
+        "service_worker": "background.js",
+        "type": "module"
+    },
+    "action": {
+        "default_title": "LinKeep",
+        "default_popup": "popup.html",
+        "default_icon": {
+            "16": "assets/link_without_circle.png",
+            "32": "assets/link_without_circle.png",
+            "48": "assets/link_dark_blue.png",
+            "128": "assets/link_dark_blue.png"
+        }
+    },
+    "commands":{
+        "save-link":{
+            "suggested_key":"Ctrl+Q",
+            "description": "save current tab link"
+        }
+    },
+    "optional_permissions": [],
+    "host_permissions": ["<all_urls>"],
+    "permissions": ["tabs", "activeTab"]
+}
