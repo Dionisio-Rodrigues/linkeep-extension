@@ -1,25 +1,20 @@
 inputName = document.getElementById("input-name");
 bttnSave = document.getElementById("bttn-save");
 
-
-//POPUP events
-
 bttnSave.addEventListener("click", saveLink);
 
-//INIT
-
 load();
-
-//CRUD functions
 
 async function load() {
     tab = await getCurrentTab();
     inputName.value = tab.title;
+    findAll();
 }
 
 async function saveLink() {
+
     let msg = {
-        message: tab,
+        tab: tab,
         option: "save"
     }
     sendMessage(msg);
@@ -31,33 +26,29 @@ async function deleteLink() {
         option: "delete"
     }
     links = await sendMessage(msg);
+    console.log(links)
 }
 
-async function updateLink() {
+// async function updateLink() {
+//     let msg = {
+//         message: tab,
+//         option: "update"
+//     }
+//     links = await sendMessage(msg);
+// }
+
+async function findAll() {
     let msg = {
-        message: tab,
-        option: "update"
+        option: "findAll"
     }
-    links = await sendMessage(msg);
+    sendMessage(msg);
 }
-
-async function getAllLink() {
-    let msg = {
-        message: tab,
-        option: "getAll"
-    }
-    links = await sendMessage(msg);
-}
-
-// CHROME events
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     console.log(message)
     console.log(sender)
     sendResponse({ message: "Response from background" })
 })
-
-// CHROME functions
 
 async function getCurrentTab() {
     let queryOptions = { active: true, lastFocusedWindow: true };
@@ -66,7 +57,11 @@ async function getCurrentTab() {
 }
 
 async function sendMessage(msg) {
-    let response = await chrome.runtime.sendMessage(msg);
+    // const response = await chrome.runtime.sendMessage(msg);
+    
+    // return response.message
+
+    const response = await chrome.runtime.sendMessage(msg)
+
     console.log(response)
-    return response;
 }

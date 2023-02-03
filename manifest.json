@@ -25,5 +25,5 @@
     },
     "optional_permissions": [],
     "host_permissions": ["<all_urls>"],
-    "permissions": ["tabs", "activeTab"]
+    "permissions": ["tabs", "activeTab", "identity", "identity.email"]
 }
